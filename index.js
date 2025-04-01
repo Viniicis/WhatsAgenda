@@ -3,6 +3,7 @@ const qrcode = require('qrcode-terminal');
 const { google } = require('googleapis');
 const moment = require('moment');
 const mysql = require('mysql2');
+const puppeteer = require('puppeteer-core');
 
 require('dotenv').config();
 
@@ -30,8 +31,28 @@ client.on('qr', qr => {
     qrcode.generate(qr, { small: true });
 });
 
-client.on('ready', () => {
+client.on('ready', async () => {
     console.log('✅ Bot do WhatsApp está pronto!');
+    
+    // Inicia o Puppeteer quando o bot estiver pronto
+    try {
+        const browser = await puppeteer.launch({
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium-browser',  // Caminho correto para o Chromium
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
+
+        // Exemplo de navegação com o Puppeteer
+        const page = await browser.newPage();
+        await page.goto('https://www.example.com');  // Substitua pelo site que deseja automatizar
+        console.log('Página carregada com sucesso');
+
+        // Lógica adicional de automação pode ir aqui...
+
+        // Feche o browser quando terminar
+        await browser.close();
+    } catch (error) {
+        console.error('Erro ao iniciar o Puppeteer:', error);
+    }
 });
 
 // Autenticação com Google Calendar
