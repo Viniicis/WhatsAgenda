@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Viniicis/WhatsAgenda/issues"
   },
-  "homepage": "https://github.com/Viniicis/WhatsAgenda#readme"
+  "homepage": "https://github.com/Viniicis/WhatsAgenda#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
