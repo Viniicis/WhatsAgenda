@@ -1,0 +1,8 @@
+# Delete the cache folder
+Remove-Item -Recurse -Force .wwebjs_cache
+
+# Delete the auth folder (if needed)
+Remove-Item -Recurse -Force .wwebjs_auth
+
+
+apagar o cache de conexão do whats
